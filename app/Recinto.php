@@ -16,4 +16,14 @@ class Recinto extends Model
     protected $fillable = [
         'nombre', 'coste_alquiler', 'precio_entrada'
     ];
+
+    // Relationships
+
+    /**
+     * Get conciertos for a recinto.
+     */
+    public function conciertos()
+    {
+        return $this->hasMany('App\Concierto', 'id_recinto', 'id');
+    }
 }
