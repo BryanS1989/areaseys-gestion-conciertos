@@ -53,4 +53,32 @@ class Concierto extends Model
     {
         return $this->belongsToMany('App\Medio', 'medios_conciertos', 'id_concierto', 'id_medio');
     }
+
+    /*
+        FUNCTIONS
+        ---------
+    */
+    public function getRentabilidad () {
+        // calculate benefits
+
+        $beneficiosEntradas = 0;
+        $totalGastoGrupos = 0;
+
+        $recinto = $this->recinto()->first();
+        $grupos = $this->grupos()->get();
+
+        $beneficiosEntradas = $this->numero_espectadores * $recinto->precio_entrada;
+
+        // Each group takes the 10% of all the sold tickets
+        $grupos->each(function ($grupo) use ($totalGastoGrupos, $beneficiosEntradas) {
+            $totalGastoGrupos += ($grupo->cache + ($beneficiosEntradas * 0.1));
+        });
+
+        $gastos = $recinto->coste_alquiler + $totalGastoGrupos;
+
+        $this->rentabilidad = $beneficiosEntradas - $gastos;
+
+        $this->save();
+    }
+
 }

@@ -16,4 +16,5 @@ class Grupo extends Model
     protected $fillable = [
         'nombre', 'cache'
     ];
+
 }

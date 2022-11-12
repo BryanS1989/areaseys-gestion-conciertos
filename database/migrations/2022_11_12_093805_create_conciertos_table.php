@@ -28,7 +28,8 @@ class CreateConciertosTable extends Migration
 
             $table->date('fecha');
 
-            $table->float('rentabilidad', 8, 2);
+            $table->float('rentabilidad', 8, 2)
+                    ->default(0);
 
             $table->timestamps();
 

@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class medioConcierto extends Model
+class MedioConcierto extends Model
 {
     // Table
     protected $table = 'medios_conciertos';

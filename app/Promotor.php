@@ -3,9 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
 class Promotor extends Model
 {
+    // Notifications to promotor
+    use Notifiable;
+
     // Table
     protected $table = 'promotores';
 

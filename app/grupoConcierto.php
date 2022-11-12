@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class grupoConcierto extends Model
+class GrupoConcierto extends Model
 {
     // Table
     protected $table = 'grupos_conciertos';
