@@ -24,7 +24,7 @@ class CreateMedioConciertosTable extends Migration
 
             // Foreign Keys
             $table->foreign('id_medio')->references('id')->on('medios');
-            $table->foreign('id_concierto')->references('id')->on('concierto');
+            $table->foreign('id_concierto')->references('id')->on('conciertos');
 
             $table->timestamps();
         });

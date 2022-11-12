@@ -24,7 +24,7 @@ class CreateGrupoConciertosTable extends Migration
 
             // Foreign Keys
             $table->foreign('id_grupo')->references('id')->on('grupos');
-            $table->foreign('id_concierto')->references('id')->on('concierto');
+            $table->foreign('id_concierto')->references('id')->on('conciertos');
 
             $table->timestamps();
         });
