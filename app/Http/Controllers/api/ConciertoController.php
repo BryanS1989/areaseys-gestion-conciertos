@@ -10,6 +10,7 @@ use App\Notifications\NewConcierto;
 use App\Promotor;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Lang;
 
 class ConciertoController extends Controller
 {
@@ -65,21 +66,23 @@ class ConciertoController extends Controller
 
         $newConcierto->numero_espectadores = $request->numero_espectadores;
 
-        $request->grupos->each(function ($grupo) use ($newConcierto) {
+        $newConcierto->save();
+
+        foreach($request->grupos as $grupo) {
 
             $grupoConcierto = new GrupoConcierto();
-            $grupoConcierto->id_grupo = $grupo->id;
-            $grupoConcierto->id_concierto = $newConcierto->id;
+            $grupoConcierto->id_grupo = $grupo['id'];
+            $grupoConcierto->id_concierto = $newConcierto->id;;
             $grupoConcierto->save();
-        });
+        };
 
-        $request->medios->each(function ($medio) use ($newConcierto) {
+        foreach($request->medios as $medio){
 
             $medioConcierto = new MedioConcierto();
-            $medioConcierto->id_grupo = $medio->id;
+            $medioConcierto->id_medio = $medio['id'];
             $medioConcierto->id_concierto = $newConcierto->id;
             $medioConcierto->save();
-        });
+        };
 
         $newConcierto->getRentabilidad();
 
@@ -92,6 +95,12 @@ class ConciertoController extends Controller
         return response()->json([
             'status' => 'CREATED',
             'concierto_id' => $newConcierto->id,
+            'message' => Lang::get($newConcierto->rentabilidad >= 0 ? 'mails.concierto.create.body.benefits' : 'mails.concierto.create.body.bills',
+                                        [
+                                            'conciertoId' => $newConcierto->id,
+                                            'rentabilidad' => $newConcierto->rentabilidad,
+                                        ]
+                                    )
         ]);
     }
 

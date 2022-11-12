@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Medio extends Model
 {
     // Table
-    protected $table = 'grupos';
+    protected $table = 'medios';
 
     // PK
     protected $primaryKey = 'id';

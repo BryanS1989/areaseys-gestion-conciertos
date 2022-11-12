@@ -46,7 +46,7 @@ class NewConcierto extends Notification
         return (new MailMessage)
                     ->from(config('mail.from.name'))
                     ->subject(Lang::get('mails.concierto.create.title', ['conciertoName' => $this->concierto->nombre]))
-                    ->line(Lang::get($this->concierto->rentabilidad >= 0 ? 'mails.concierto.create.benefits' : 'mails.concierto.create.bills',
+                    ->line(Lang::get($this->concierto->rentabilidad >= 0 ? 'mails.concierto.create.body.benefits' : 'mails.concierto.create.body.bills',
                                         [
                                             'conciertoId' => $this->concierto->id,
                                             'rentabilidad' => $this->concierto->rentabilidad,

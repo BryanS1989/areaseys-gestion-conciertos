@@ -27,7 +27,7 @@ class Concierto extends Model
      */
     public function promotor()
     {
-        return $this->belongsTo('App\Promotor', 'id', 'id_promotor');
+        return $this->belongsTo('App\Promotor', 'id_promotor', 'id');
     }
 
     /**
@@ -35,7 +35,7 @@ class Concierto extends Model
     */
     public function recinto()
     {
-        return $this->belongsTo('App\Medio', 'id', 'id_recinto');
+        return $this->belongsTo('App\Recinto', 'id_recinto', 'id');
     }
 
     /**
@@ -70,9 +70,9 @@ class Concierto extends Model
         $beneficiosEntradas = $this->numero_espectadores * $recinto->precio_entrada;
 
         // Each group takes the 10% of all the sold tickets
-        $grupos->each(function ($grupo) use ($totalGastoGrupos, $beneficiosEntradas) {
+        foreach ($grupos as $grupo) {
             $totalGastoGrupos += ($grupo->cache + ($beneficiosEntradas * 0.1));
-        });
+        };
 
         $gastos = $recinto->coste_alquiler + $totalGastoGrupos;
 
