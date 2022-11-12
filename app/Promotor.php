@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Promotores extends Model
+class Promotor extends Model
 {
     // Table
     protected $table = 'promotores';
