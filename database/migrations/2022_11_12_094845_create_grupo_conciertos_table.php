@@ -22,6 +22,10 @@ class CreateGrupoConciertosTable extends Migration
             $table->bigInteger('id_concierto')
                     ->unsigned();
 
+            // Foreign Keys
+            $table->foreign('id_grupo')->references('id')->on('grupos');
+            $table->foreign('id_concierto')->references('id')->on('concierto');
+
             $table->timestamps();
         });
     }
